@@ -6,17 +6,38 @@
 
 ### 方式一：Docker 一键部署（推荐）
 
-最简单的方式，只需一条命令：
+最简单的方式，只需两条命令：
 
 ```bash
-# 1. 下载一键部署脚本
-curl -fsSL https://raw.githubusercontent.com/xue256964/qq-farm-bot/main/deploy.sh -o deploy.sh
+# 1. 克隆项目
+git clone https://github.com/xue256964/qq-farm-bot.git
+cd qq-farm-bot
 
-# 2. 给脚本添加执行权限
+# 2. 运行自动部署脚本
 chmod +x deploy.sh
+./deploy.sh auto docker
+```
 
-# 3. 运行部署脚本（选择选项 1）
+或者使用一行命令：
+
+```bash
+git clone https://github.com/xue256964/qq-farm-bot.git && cd qq-farm-bot && ./deploy.sh auto docker
+```
+
+部署完成后访问：`http://您的 IP:3007`
+
+默认账号密码：`admin` / `admin`（请尽快修改）
+
+---
+
+### 方式二：交互式部署
+
+```bash
+git clone https://github.com/xue256964/qq-farm-bot.git
+cd qq-farm-bot
+chmod +x deploy.sh
 ./deploy.sh
+# 然后根据菜单选择部署方式
 ```
 
 部署完成后访问：`http://您的IP:3007`

@@ -280,16 +280,47 @@ check_directory() {
     fi
 }
 
+# 自动部署（无交互式）
+auto_deploy() {
+    check_directory
+
+    info "欢迎使用 QQ Farm Bot 一键部署脚本"
+    info "部署模式：$DEPLOY_MODE"
+
+    case $DEPLOY_MODE in
+        docker)
+            deploy_docker
+            ;;
+        source)
+            deploy_source
+            ;;
+        *)
+            error "未知的部署模式：$DEPLOY_MODE"
+            echo "可用模式：docker, source"
+            exit 1
+            ;;
+    esac
+}
+
 # 主函数
 main() {
     check_directory
 
-    echo ""
-    info "欢迎使用 QQ Farm Bot 一键部署脚本"
-    info "项目：https://github.com/xue256964/qq-farm-bot"
-    echo ""
+    # 检查命令行参数
+    if [ "$1" = "auto" ]; then
+        DEPLOY_MODE="$2"
+        if [ -z "$DEPLOY_MODE" ]; then
+            DEPLOY_MODE="docker"
+        fi
+        auto_deploy
+    else
+        echo ""
+        info "欢迎使用 QQ Farm Bot 一键部署脚本"
+        info "项目：https://github.com/xue256964/qq-farm-bot"
+        echo ""
 
-    show_menu
+        show_menu
+    fi
 }
 
 # 执行主函数
