@@ -1,0 +1,19 @@
+[Unit]
+Description=QQ Farm Bot
+Documentation=https://github.com/xue256964/qq-farm-bot
+After=network.target
+
+[Service]
+Type=forking
+WorkingDirectory=/path/to/qq-farm-bot
+Environment="NODE_ENV=production"
+Environment="ADMIN_PORT=3007"
+ExecStart=/usr/bin/pnpm run dev:core
+ExecStop=/usr/bin/pkill -f 'qq-farm-bot'
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/qq-farm-bot.log
+StandardError=append:/var/log/qq-farm-bot.log
+
+[Install]
+WantedBy=multi-user.target
